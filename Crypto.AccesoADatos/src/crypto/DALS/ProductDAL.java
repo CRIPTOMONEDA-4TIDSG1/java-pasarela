@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductDAL {
       
  public void create(ProductEN product) throws SQLException {
-        String sql = "INSERT INTO Orders (cryptoName, descriptionCrypto, price, amount) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Cryptocurrencies (cryptoName, descriptionCrypto, price, amount) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = ComunDB.obtenerConexion();
              PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -29,12 +29,12 @@ public class ProductDAL {
 
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new SQLException("Error al crear el Producto.", e);
+            throw new SQLException("Error creating the Product.", e);
         }
     }
  
     public List<ProductEN> searchAll() throws SQLException {
-        String sql = "SELECT cryptoName, descriptionCrypto, price, amount, FROM Products";
+        String sql = "SELECT cryptoName, descriptionCrypto, price, amount, FROM Cryptocurrencies";
         List<ProductEN> productList = new ArrayList<>();
 
         try (Connection conn = ComunDB.obtenerConexion();
@@ -51,14 +51,14 @@ public class ProductDAL {
                 productList.add(product);
             }
         } catch (SQLException e) {
-            throw new SQLException("Error al buscar todas las órdenes.", e);
+            throw new SQLException("Error searching for the products.", e);
         }
 
         return productList;
     }
 
     public ProductEN searchById(int id) throws SQLException {
-        String sql = "SELECT cryptoName, descriptionCrypto, price, amount  FROM Products WHERE id = ?";
+        String sql = "SELECT cryptoName, descriptionCrypto, price, amount  FROM Cryptocurrencies WHERE id = ?";
         ProductEN product = null;
 
         try (Connection conn = ComunDB.obtenerConexion();
@@ -74,7 +74,7 @@ public class ProductDAL {
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Error al buscar la producto por ID.", e);
+            throw new SQLException("Error searching for the product by ID.", e);
         }
 
         return product;

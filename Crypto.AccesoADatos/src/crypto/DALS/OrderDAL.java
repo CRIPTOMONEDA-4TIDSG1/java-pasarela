@@ -18,7 +18,7 @@ import java.util.List;
 public class OrderDAL {
     
  public void create(OrderEN order) throws SQLException {
-        String sql = "INSERT INTO Orders (dateOrder, email, productId, quantity, total) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO CryptoOrder (dateOrder, email, productId, quantity, total) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = ComunDB.obtenerConexion();
              PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -30,12 +30,12 @@ public class OrderDAL {
             statement.setDouble(5, order.getTotal());
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new SQLException("Error al crear la orden.", e);
+            throw new SQLException("Error creating the order.", e);
         }
     }
  
     public List<OrderEN> searchAll() throws SQLException {
-        String sql = "SELECT dateOrder, email, productId, quantity, total FROM Orders";
+        String sql = "SELECT dateOrder, email, productId, quantity, total FROM CryptoOrder";
         List<OrderEN> orders = new ArrayList<>();
 
         try (Connection conn = ComunDB.obtenerConexion();
@@ -52,14 +52,14 @@ public class OrderDAL {
                 orders.add(order);
             }
         } catch (SQLException e) {
-            throw new SQLException("Error al buscar todas las órdenes.", e);
+            throw new SQLException("Error searching for all the orders.", e);
         }
 
         return orders;
     }
 
     public OrderEN searchById(int id) throws SQLException {
-        String sql = "SELECT dateOrder, email, productId, quantity, total FROM Orders WHERE id = ?";
+        String sql = "SELECT dateOrder, email, productId, quantity, total FROM CryptoOrder WHERE id = ?";
         OrderEN order = null;
 
         try (Connection conn = ComunDB.obtenerConexion();
@@ -76,7 +76,7 @@ public class OrderDAL {
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Error al buscar la orden por ID.", e);
+            throw new SQLException("Error searching for the order by ID.", e);
         }
 
         return order;
