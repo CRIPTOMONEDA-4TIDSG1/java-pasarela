@@ -1,5 +1,8 @@
-package crypto.accesoadatos;
 
+package crypto.DALS;
+
+
+import crypto.accesoadatos.ComunDB;
 import crypto.entidadesdenegocio.UserEN;
 import java.sql.Connection;
 
