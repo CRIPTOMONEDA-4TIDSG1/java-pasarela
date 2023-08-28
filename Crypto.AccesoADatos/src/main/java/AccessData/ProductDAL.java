@@ -1,8 +1,8 @@
 
-package com.mycompany.crypto.accesoadatos;
+package AccessData;
 
-import com.mycompany.crypto.ComunDB.ComunDB;
-import com.mycompany.crypto.entidadesdenegocio.ProductEN;
+import comunDB.ComunDB;
+import EntityBussines.ProductEN;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

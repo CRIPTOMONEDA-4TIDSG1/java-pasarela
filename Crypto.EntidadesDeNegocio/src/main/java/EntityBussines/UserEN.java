@@ -1,6 +1,5 @@
 
-package com.mycompany.crypto.entidadesdenegocio;
-
+package EntityBussines;
 /**
  *
  * @author themi

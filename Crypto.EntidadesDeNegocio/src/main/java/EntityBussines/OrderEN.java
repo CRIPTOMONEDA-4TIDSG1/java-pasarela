@@ -1,5 +1,5 @@
 
-package com.mycompany.crypto.entidadesdenegocio;
+package EntityBussines;
 
 import java.util.Date;
 /**

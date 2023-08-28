@@ -23,5 +23,5 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <exec.mainClass>com.mycompany.crypto.accesoadatoss.CryptoAccesoADatoss</exec.mainClass>
     </properties>
-    <name>Crypto.AccesoADatos</name>
+    <name>Crypto.CryptoDAL</name>
 </project>
