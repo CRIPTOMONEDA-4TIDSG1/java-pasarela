@@ -15,7 +15,7 @@ public class ComunDB {
     
     static int TIPODB = TipoDB.MYSQL; // Propiedad para el tipo de gestor de base de datos que estamos utilizando
     
-    static String connectionUrl = "jdbc:mysql://localhost:3306/bookDB?user=root&password=root_123";
+    static String connectionUrl = "jdbc:mysql://localhost:3306/PaymentGateway?user=root&password=root_123";
     
     public static Connection obtenerConexion() throws SQLException {
         // Registrar el Driver de la conexión a la base de datos MySQL

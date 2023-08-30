@@ -33,7 +33,7 @@ public class ProductDAL {
         }
     }
  
-    public List<ProductEN> searchAll() throws SQLException {
+    public List<ProductEN> searchAll(){
         String sql = "SELECT cryptoName, descriptionCrypto, price, amount, FROM Cryptocurrencies";
         List<ProductEN> productList = new ArrayList<>();
 
@@ -51,7 +51,7 @@ public class ProductDAL {
                 productList.add(product);
             }
         } catch (SQLException e) {
-            throw new SQLException("Error searching for the products.", e);
+            
         }
 
         return productList;

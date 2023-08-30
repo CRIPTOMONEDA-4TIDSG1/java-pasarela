@@ -6,3 +6,9 @@
 /Crypto.EntidadesDeNegocio/build/
 /Crypto.Web/build/
 /Crypto.EntidadesDeNegocio/dist/
+mysql-connector-j-8.0.33.jar
+/Crypto.EntidadesDeNegocio/target/
+/Crypto.AccesoADatos/target/
+/web/target/
+/Crypto.CryptoWeb/target/
+/CryptoWeb/target/
