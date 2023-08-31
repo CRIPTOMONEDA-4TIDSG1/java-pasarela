@@ -16,8 +16,7 @@ public class ProductEN {
     }
     
     
-    public ProductEN(int id, String cryptoName, String descriptionCrypto, double price, int amount) {
-        this.id = id;
+    public ProductEN( String cryptoName, String descriptionCrypto, float price, int amount) {
         this.cryptoName = cryptoName;
         this.descriptionCrypto = descriptionCrypto;
         this.price = price;
