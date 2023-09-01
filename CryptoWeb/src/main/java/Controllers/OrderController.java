@@ -14,9 +14,8 @@ import com.stripe.model.checkout.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Date;
+import java.time.LocalDate;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -65,79 +64,60 @@ public class OrderController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
-    @Override
+     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        Stripe.apiKey = "sk_test_51NT6LPHZVMcvwy3PLsN0auZyZoQuH8XcZ7LZUuApoPoQOCDj8iHTC84SydMpX46Atg2OY3AkPVhbuhfG1QQgOeYP00dBebTfYw"; // Tu clave secreta de Stripe
-        
         // Recupera los parámetros de la URL
         String productName = request.getParameter("productName");
         BigDecimal price = new BigDecimal(request.getParameter("price"));
         BigDecimal total = new BigDecimal(request.getParameter("total"));
         int id = Integer.parseInt(request.getParameter("Id"));
-
-        // Calcula la cantidad
+        
         int amount = total.intValue() / price.intValue();
+        
+        Date currentDate = Date.valueOf(LocalDate.now());
 
-        // Obtiene la fecha actual
-        Date now = new Date();
-
-        OrderEN order;
-        order = new OrderEN(now,"kalet.elsalva.com",id,total.intValue(),amount);
+   
+        OrderEN order = new OrderEN(currentDate,"kalet.elsalva.com",id,total.intValue(),amount);
         new OrderDAL().create(order);
 
-        // Agrega la orden (sustituye esta línea con la lógica real)
-        // _orderBL.AddOrder(order);
+         
+        String domain = "https://localhost:8080/"; // Cambia la URL según corresponda
+        
+        Stripe.apiKey = "sk_test_51NT6LPHZVMcvwy3PLsN0auZyZoQuH8XcZ7LZUuApoPoQOCDj8iHTC84SydMpX46Atg2OY3AkPVhbuhfG1QQgOeYP00dBebTfYw"; // Tu clave secreta de Stripe
+      
+        SessionCreateParams.Builder builder = new SessionCreateParams.Builder()
+                .setSuccessUrl(domain + "checkout/order-confirmation.jsp")
+                .setCancelUrl(domain + "checkout/login.jsp")
+                .setMode(SessionCreateParams.Mode.PAYMENT);
 
-        // Configura la URL de éxito y cancelación
-        String domain = "https://paymentgateway.somee.com/";
-        String successUrl = domain + "checkout/order-confirmation.jsp";
-        String cancelUrl = domain + "checkout/login.jsp";
 
-        // Construye los objetos de línea de sesión
-        SessionCreateParams.LineItem.PriceData.ProductData productData =
-                SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                        .setName(productName)
-                        .build();
+        SessionCreateParams.LineItem.PriceData.ProductData.Builder productDataBuilder =
+            SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                .setName(productName);
 
-        SessionCreateParams.LineItem.PriceData priceData =
-                SessionCreateParams.LineItem.PriceData.builder()
+                SessionCreateParams.LineItem.PriceData.Builder priceDataBuilder =
+                    SessionCreateParams.LineItem.PriceData.builder()
                         .setCurrency("usd")
-                        .setUnitAmount(price.multiply(BigDecimal.valueOf(100)).longValue())
-                        .setProductData(productData)
-                        .build();
+                        .setUnitAmount((long) (price.intValue() * 100))
+                        .setProductData(productDataBuilder.build());
 
-        SessionCreateParams.LineItem lineItem =
-                SessionCreateParams.LineItem.builder()
-                        .setPriceData(priceData)
-                        .setQuantity((long) amount)
-                        .build();
+               SessionCreateParams.LineItem.Builder lineItemBuilder =
+               SessionCreateParams.LineItem.builder()
+                    .setPriceData(priceDataBuilder.build())
+                    .setQuantity((long) amount);
+               
+                builder.addLineItem(lineItemBuilder.build());
+                
+         try {
+            SessionCreateParams createParams = builder.build();
+            Session session = Session.create(createParams);
 
-        // Configura la sesión
-        SessionCreateParams createParams = SessionCreateParams.builder()
-                .setSuccessUrl(successUrl)
-                .setCancelUrl(cancelUrl)
-                .setLineItems(Collections.singletonList(lineItem))
-                .setMode(SessionCreateParams.Mode.PAYMENT)
-                .build();
-
-        // Crea la sesión
-        Session session = null;
-        try {
-            
-            session = Session.create(createParams);
-        } catch (StripeException ex) {
-            Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("sessionId", session.getId());
+            request.getRequestDispatcher("/Checkout.jsp").forward(request, response);
+        }catch (StripeException ex) {
+            // Maneja la excepción, por ejemplo, muestra un mensaje de error
+            ex.printStackTrace();
         }
-
-        // Almacena la sesión en la solicitud
-        request.setAttribute("sessionId", session.getId());
-
-        // Redirige a la página de checkout
-        request.getRequestDispatcher("/Checkout.jsp").forward(request, response);
-    }
-}
-
-
+    }   
+}  

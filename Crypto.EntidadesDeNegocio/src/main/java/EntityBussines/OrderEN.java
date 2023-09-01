@@ -1,7 +1,7 @@
 
 package EntityBussines;
 
-import java.util.Date;
+import java.sql.Date;
 /**
  *
  * @author themi

@@ -4,7 +4,6 @@ package AccessData;
 import comunDB.ComunDB;
 import EntityBussines.OrderEN;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,20 +16,22 @@ import java.util.List;
  */
 public class OrderDAL {
     
- public void create(OrderEN order) throws SQLException {
-        String sql = "INSERT INTO CryptoOrder (dateOrder, email, productId, quantity, total) VALUES (?, ?, ?, ?, ?)";
-
+ public void create(OrderEN order) {
+        String sql = "INSERT INTO CryptoOrder (DateOrder, email, product_id, Quantity, total) VALUES (?, ?, ?, ?, ?)";
+        
+         ;
         try (Connection conn = ComunDB.obtenerConexion();
              PreparedStatement statement = conn.prepareStatement(sql)) {
 
-            statement.setDate(1, (Date) order.getDateOrder());
+            statement.setDate(1, order.getDateOrder());
             statement.setString(2, order.getEmail());
-            statement.setInt(3, order.getId());
+            statement.setInt(3, order.getProductId());
             statement.setDouble(4, order.getQuantity());
             statement.setDouble(5, order.getTotal());
             statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new SQLException("Error creating the order.", e);
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
  

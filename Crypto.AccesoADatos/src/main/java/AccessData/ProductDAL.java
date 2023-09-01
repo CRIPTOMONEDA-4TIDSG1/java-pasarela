@@ -44,6 +44,7 @@ public class ProductDAL {
 
             while (resultSet.next()) {
                 ProductEN product = new ProductEN(
+                        resultSet.getInt("Id"),
                         resultSet.getString("cryptoName"),
                         resultSet.getString("descriptionCrypto"),
                         resultSet.getFloat("price"),

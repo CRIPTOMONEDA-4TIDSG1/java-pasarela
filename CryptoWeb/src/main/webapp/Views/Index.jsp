@@ -34,13 +34,13 @@
         }
     }
 
-     function redirectToCheckOut(id, price, productName) {
+     function redirectToCheckOut( id, price, productName) {
         const amountOutput = event.target.parentElement.parentElement.querySelector('#total-price');
         const total = amountOutput.value;
-      
-        const url = `/CryptoWeb/OrderController?Id=${id}&total=${total}&price=${price}&productName=${productName}`;
+        const Price = parseInt(price).toFixed(2);
         
-       
+        const url = "/CryptoWeb/OrderController?Id="+ id +"&"+"total=" + total +"&price="+ Price +"&productName="+ productName;  
+        
         window.location.href = url;
     }
     </script>
@@ -69,7 +69,7 @@
                 <td>
                     <input type="text" id="total-price" readonly class="amount-output" style="width: 80px;">
                     <span class="crypto-name"></span>
-                    <button onclick="redirectToCheckOut('<%= product.getId() %>', '<%= product.getPrice() %>', '<%= product.getCryptoName() %>')">Comprar</button>
+                    <button type="button" onclick="redirectToCheckOut('<%= product.getId() %>', '<%= product.getPrice() %>', '<%= product.getCryptoName() %>')">Comprar</button>
                 </td>
             </tr>
         <% } %>
