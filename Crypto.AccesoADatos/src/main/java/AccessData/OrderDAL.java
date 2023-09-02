@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,22 +37,22 @@ public class OrderDAL {
     }
  
     public List<OrderEN> getAllOrders() {
-        String sql = "SELECT dateOrder, email, productId, quantity, total FROM CryptoOrder";
+        String sql = "SELECT * FROM CryptoOrder";
         List<OrderEN> orders = new ArrayList<>();
 
         try (Connection conn = ComunDB.obtenerConexion();
-             PreparedStatement statement = conn.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                OrderEN order = new OrderEN();
-                order.setDateOrder(resultSet.getDate("dateOrder"));
-                order.setEmail(resultSet.getString("email"));
-                order.setProductId(resultSet.getInt("productId"));
-                order.setQuantity(resultSet.getDouble("quantity"));
-                order.setTotal(resultSet.getDouble("total"));
-                orders.add(order);
-            }
+                OrderEN order = new OrderEN(
+                resultSet.getInt("Id"),
+                resultSet.getDate("DateOrder"),
+                resultSet.getString("email"),
+                resultSet.getInt("product_id"),
+                resultSet.getDouble("Quantity"),
+                resultSet.getDouble("total")
+                );  orders.add(order);}
          } catch (SQLException ex) {
             ex.printStackTrace();
         }

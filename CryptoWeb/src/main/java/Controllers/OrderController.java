@@ -78,7 +78,7 @@ public class OrderController extends HttpServlet {
         Date currentDate = Date.valueOf(LocalDate.now());
 
    
-        OrderEN order = new OrderEN(currentDate,"kalet.elsalva.com",id,total.intValue(),amount);
+        OrderEN order = new OrderEN(0,currentDate,"kalet.elsalva.com",id,total.intValue(),amount);
         new OrderDAL().create(order);
 
          

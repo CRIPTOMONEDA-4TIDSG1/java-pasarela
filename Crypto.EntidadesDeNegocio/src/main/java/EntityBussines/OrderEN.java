@@ -18,7 +18,8 @@ public class OrderEN {
     public OrderEN() {
     }
 
-    public OrderEN( Date dateOrder, String email, int productId, double quantity, double total) {
+    public OrderEN(int id, Date dateOrder, String email, int productId, double quantity, double total) {
+        this.id = id;
         this.dateOrder = dateOrder;
         this.email = email;
         this.productId = productId;

@@ -11,10 +11,11 @@
     <meta charset="UTF-8">
     <title>Detalles de la Orden</title>
     <link rel="stylesheet" type="text/css" href="css/Detalle.css">
+   
 </head>
 <body>
     <h1>Detalles de la Orden</h1>
-
+    
     <table>
         <tr>
             <th>ID de la Orden:</th>

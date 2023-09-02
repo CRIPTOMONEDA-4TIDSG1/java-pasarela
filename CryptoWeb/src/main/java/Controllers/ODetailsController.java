@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author themi
  */
-@WebServlet(name = "ODetailsController", urlPatterns = {"/ODetailsController"})
+@WebServlet(name = "OrderDetailsController", urlPatterns = {"/OrderDetailsController"})
 public class ODetailsController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,8 +26,8 @@ public class ODetailsController extends HttpServlet {
 
         if (action == null) {
             // Si no se especifica ninguna acción, mostrar la lista de todas las órdenes
-            List<OrderEN> orders = new OrderDAL().getAllOrders();
-            request.setAttribute("Orders", orders);
+            List<OrderEN> Orders = new OrderDAL().getAllOrders();
+            request.setAttribute("Orders", Orders);
             request.getRequestDispatcher("/Views/Order.jsp").forward(request, response);
         } else if (action.equals("view")) {
             // Si la acción es "view", se solicita ver los detalles de una orden específica

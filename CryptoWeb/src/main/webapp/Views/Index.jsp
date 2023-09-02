@@ -53,6 +53,11 @@
         
         window.location.href = url;
     }
+    
+    function onOrderChange(){
+        const url = "/CryptoWeb/OrderDetailsController"
+        window.location.href = url
+    }
     </script>
 </head>
 <body>
@@ -84,6 +89,7 @@
             </tr>
         <% } %>
     </table>
+    <button onclick="onOrderChange()"> Orders </button>
 </body>
 
 </html>
