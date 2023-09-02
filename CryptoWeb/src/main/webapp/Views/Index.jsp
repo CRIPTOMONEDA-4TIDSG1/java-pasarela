@@ -6,6 +6,7 @@
 <%@page import="java.util.List"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="EntityBussines.ProductEN" %>
+<jsp:include page="/layout/header.jsp" />
 <!DOCTYPE html>
 <html>
 
@@ -54,9 +55,6 @@
         window.location.href = url;
     }
     
-    function onOrderChange(){
-        const url = "/CryptoWeb/OrderDetailsController"
-        window.location.href = url
     }
     </script>
 </head>
@@ -89,7 +87,6 @@
             </tr>
         <% } %>
     </table>
-    <button onclick="onOrderChange()"> Orders </button>
 </body>
 
 </html>
