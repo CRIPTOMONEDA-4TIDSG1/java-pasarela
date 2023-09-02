@@ -1,7 +1,7 @@
 
 package EntityBussines;
 
-import java.util.Date;
+import java.sql.Date;
 /**
  *
  * @author themi
@@ -18,8 +18,7 @@ public class OrderEN {
     public OrderEN() {
     }
 
-    public OrderEN(int id, Date dateOrder, String email, int productId, double quantity, double total) {
-        this.id = id;
+    public OrderEN( Date dateOrder, String email, int productId, double quantity, double total) {
         this.dateOrder = dateOrder;
         this.email = email;
         this.productId = productId;

@@ -62,7 +62,8 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-            List<ProductEN> products = new ProductDAL().searchAll();
+            List<ProductEN> products = new ProductDAL().getAllProducts();
+            List<ProductEN> res = products;
             request.setAttribute("products", products);
             request.getRequestDispatcher("/Views/Index.jsp").forward(request, response);
        

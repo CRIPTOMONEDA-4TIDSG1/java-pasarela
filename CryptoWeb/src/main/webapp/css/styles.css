@@ -1,0 +1,38 @@
+/* Estilo para el encabezado h1 */
+h1 {
+    color: #007bff; /* Cambia el color del texto a azul */
+    text-align: center; /* Centra el texto */
+}
+
+/* Estilo para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Combina los bordes de la tabla */
+    margin-top: 20px; /* Agrega un margen superior */
+}
+
+/* Estilo para las celdas de encabezado de la tabla */
+th {
+    background-color: #f2f2f2; /* Fondo gris claro */
+    text-align: left; /* Alinea el texto a la izquierda */
+    padding: 10px; /* Agrega un espacio interno */
+}
+
+/* Estilo para las filas impares de la tabla */
+tr:nth-child(odd) {
+    background-color: #e6e6e6; /* Fondo gris más claro */
+}
+
+/* Estilo para los botones de comprar */
+button {
+    background-color: #007bff; /* Fondo azul */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin bordes */
+    padding: 5px 10px; /* Espaciado interno */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+}
+
+/* Estilo para los botones de comprar al pasar el ratón */
+button:hover {
+    background-color: #0056b3; /* Fondo azul más oscuro */
+}
