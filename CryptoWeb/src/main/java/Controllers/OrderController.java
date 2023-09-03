@@ -82,13 +82,13 @@ public class OrderController extends HttpServlet {
         new OrderDAL().create(order);
 
          
-        String domain = "https://localhost:8080/"; // Cambia la URL según corresponda
+        String domain = "http://localhost:8384/"; // Cambia la URL según corresponda
         
         Stripe.apiKey = "sk_test_51NT6LPHZVMcvwy3PLsN0auZyZoQuH8XcZ7LZUuApoPoQOCDj8iHTC84SydMpX46Atg2OY3AkPVhbuhfG1QQgOeYP00dBebTfYw"; // Tu clave secreta de Stripe
       
         SessionCreateParams.Builder builder = new SessionCreateParams.Builder()
-                .setSuccessUrl(domain + "checkout/order-confirmation.jsp")
-                .setCancelUrl(domain + "checkout/login.jsp")
+                .setSuccessUrl(domain + "CryptoWeb/confirmation")
+                .setCancelUrl(domain + "CryptoWeb/login")
                 .setMode(SessionCreateParams.Mode.PAYMENT);
 
 

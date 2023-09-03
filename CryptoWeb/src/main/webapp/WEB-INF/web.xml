@@ -8,6 +8,10 @@
         <servlet-name>OrderController</servlet-name>
         <servlet-class>Controllers.OrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Chekout</servlet-name>
+        <servlet-class>Controllers.Chekout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductController</servlet-name>
         <url-pattern>/ProductController</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>OrderController</servlet-name>
         <url-pattern>/OrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Chekout</servlet-name>
+        <url-pattern>/Chekout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

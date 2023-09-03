@@ -61,7 +61,7 @@ public class OrderDAL {
     }
 
     public OrderEN searchById(int id)  {
-        String sql = "SELECT dateOrder, email, productId, quantity, total FROM CryptoOrder WHERE id = ?";
+        String sql = "SELECT * FROM CryptoOrder WHERE Id = ?";
         OrderEN order = null;
 
         try (Connection conn = ComunDB.obtenerConexion();
@@ -70,16 +70,16 @@ public class OrderDAL {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     order = new OrderEN();
+                    order.setId(resultSet.getInt("Id"));
                     order.setDateOrder(resultSet.getDate("dateOrder"));
                     order.setEmail(resultSet.getString("email"));
-                    order.setProductId(resultSet.getInt("productId"));
-                    order.setQuantity(resultSet.getDouble("quantity"));
+                    order.setProductId(resultSet.getInt("product_id"));
+                    order.setQuantity(resultSet.getDouble("Quantity"));
                     order.setTotal(resultSet.getDouble("total"));
                 }
             }
       } catch (SQLException e) {
             e.printStackTrace();
-            // Manejo de excepciones relacionadas con la base de datos
         }
 
         return order;

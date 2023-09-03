@@ -44,6 +44,6 @@
         </tr>
     </table>
 
-    <a href="ODetailsController">Volver a la Lista de Órdenes</a>
+    <a href="/CryptoWeb/OrderDetailsController">Volver a la Lista de Órdenes</a>
 </body>
 </html>

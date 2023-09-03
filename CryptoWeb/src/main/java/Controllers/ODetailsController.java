@@ -15,27 +15,33 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author themi
  */
-@WebServlet(name = "OrderDetailsController", urlPatterns = {"/OrderDetailsController"})
+@WebServlet(name = "OrderDetailsController", urlPatterns = {"/OrderDetailsController","/Order/*"})
 public class ODetailsController extends HttpServlet {
-
+    
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String action = request.getParameter("action");
+         String url = request.getRequestURI(); 
+         String contextPath = request.getContextPath(); 
 
-        if (action == null) {
-            // Si no se especifica ninguna acción, mostrar la lista de todas las órdenes
-            List<OrderEN> Orders = new OrderDAL().getAllOrders();
-            request.setAttribute("Orders", Orders);
-            request.getRequestDispatcher("/Views/Order.jsp").forward(request, response);
-        } else if (action.equals("view")) {
-            // Si la acción es "view", se solicita ver los detalles de una orden específica
-            int orderId = Integer.parseInt(request.getParameter("id"));
+         String relativePath = url.substring(contextPath.length());
+
+        if (relativePath.startsWith("/Order/") ) {
+            
+            String idStr = relativePath.substring("/Order/".length());
+            int orderId = Integer.parseInt(idStr);
+            
             OrderEN order = new OrderDAL().searchById(orderId);
             request.setAttribute("OrderDetails", order);
             request.getRequestDispatcher("/Views/OrderDetails.jsp").forward(request, response);
-        }
+        } else {
+            List<OrderEN> Orders = new OrderDAL().getAllOrders();
+            request.setAttribute("Orders", Orders);
+            request.getRequestDispatcher("/Views/Order.jsp").forward(request, response);
+       
+          }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -31,7 +31,7 @@
                     <td><%= order.getProductId() %></td>
                     <td><%= order.getQuantity() %></td>
                     <td><%= order.getTotal() %></td>
-                    <td><a href="ODetailsController?orderId=<%= order.getId() %>">Ver Detalles</a></td>
+                    <td><a href="Order/<%= order.getId() %>">Ver Detalles</a></td>
                 </tr>
             <% } %>
         </table>

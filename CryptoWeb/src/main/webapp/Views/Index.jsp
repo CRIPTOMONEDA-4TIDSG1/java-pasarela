@@ -51,10 +51,7 @@
         const Price = parseInt(price).toFixed(2);
         
         const url = "/CryptoWeb/OrderController?Id="+ id +"&"+"total=" + total +"&price="+ Price +"&productName="+ productName;  
-        
-        window.location.href = url;
-    }
-    
+       window.location.href = url;
     }
     </script>
 </head>
