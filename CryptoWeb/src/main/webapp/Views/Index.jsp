@@ -22,7 +22,7 @@
                     <th class="text-center">TITULO</th>
                     <th class="text-center">DESCRIPCIÓN</th>
                     <th class="text-center">STOCK</th>
-                    <th class="text-center">PRECIO</th>
+                    <th class="text-center">CANTIDAD</th>
                     <th class="text-center">ACCIONES</th>
                 </tr>
             </thead>
@@ -46,9 +46,9 @@
                         </td>
                         <td>
                             <div class="input-group">
-                                <input type="text" readonly class="form-control amount-output" style="width: 80px;">
+                                <input type="text" readonly id="total-price" class="form-control amount-output" style="width: 80px;">
                                 <span class="input-group-append">
-                                    <span class="input-group-text crypto-name"></span>
+                                    <span id="crypto-name" class="input-group-text "></span>
                                 </span>
                             </div>
                             <button type="button" class="btn btn-primary mt-2"
@@ -67,8 +67,9 @@
        function convertToCrypto(input) {
         const dollarAmount = parseFloat(input.value);
         const exchangeRate = parseFloat(input.dataset.exchangerate);
-        const output = input.parentElement.nextElementSibling.querySelector('.amount-output');
-        const cryptoNameSpan = input.parentElement.nextElementSibling.querySelector('.crypto-name');
+        const output = document.getElementById('total-price');
+        
+        const cryptoNameSpan = document.getElementById('crypto-name');
         if (!isNaN(dollarAmount) && dollarAmount > 0) {
             const cryptoAmount = dollarAmount * exchangeRate;
             output.value = cryptoAmount.toFixed(2);
